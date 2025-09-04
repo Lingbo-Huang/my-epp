@@ -26,11 +26,12 @@ func newMyExternalProcessorServer() *myExternalProcessorServer {
 			"pod-llama2-lora-1:8000": 2,
 			"pod-llama2-lora-2:8000": 8,
 			"pod-llama2-base:8000":   5,
+			"pod-llama2-base-2":      6,
 		},
 	}
 }
 
-// 选择最优端点（业务逻辑不变）
+// 选择最优端点
 func (s *myExternalProcessorServer) pickOptimalEndpoint(endpointSubset []string, needLoRA bool) string {
 	if len(endpointSubset) == 0 {
 		log.Println("警告：无可用端点，使用默认值")
@@ -46,7 +47,8 @@ func (s *myExternalProcessorServer) pickOptimalEndpoint(endpointSubset []string,
 		}
 
 		load, exists := s.podLoadMap[endpoint]
-		if !exists {
+		if !exists { // 没有这个名字的端点
+			// 如果一个端点在 Envoy 的服务发现中存在，但我们的负载监控系统（这里是 podLoadMap）里没有它的数据，这意味着这个端点的状态是未知的。它可能刚刚启动，也可能已经崩溃但尚未从服务发现中移除。
 			log.Printf("警告：端点 [%s] 无负载数据，跳过", endpoint)
 			continue
 		}
@@ -61,7 +63,8 @@ func (s *myExternalProcessorServer) pickOptimalEndpoint(endpointSubset []string,
 		}
 	}
 
-	if bestEndpoint == "" {
+	if bestEndpoint == "" { // 可能是因为 needLoRA 过滤掉了所有端点，没有符合条件的
+		// 实际生产中可以选择一个默认的、专门用于处理 fallback 的端点池
 		bestEndpoint = endpointSubset[0]
 		log.Printf("警告：无符合条件端点，fallback 到 [%s]", bestEndpoint)
 	}
@@ -69,7 +72,7 @@ func (s *myExternalProcessorServer) pickOptimalEndpoint(endpointSubset []string,
 	return bestEndpoint
 }
 
-// Process：核心流处理接口（仅修正 HeaderMutation.SetHeaders 部分）
+// Process：核心流处理接口
 func (s *myExternalProcessorServer) Process(stream extprocv3.ExternalProcessor_ProcessServer) error {
 	log.Println("新 Envoy 流连接建立")
 	defer log.Println("Envoy 流连接关闭")
@@ -96,7 +99,7 @@ func (s *myExternalProcessorServer) Process(stream extprocv3.ExternalProcessor_P
 			continue
 		}
 
-		// 3. 获取请求头列表（你的定义：返回 []*corev3.HeaderValue）
+		// 3. 获取请求头列表
 		headerMap := httpReq.GetHeaders()
 		if headerMap == nil {
 			log.Println("请求头为空，返回空响应")
@@ -143,18 +146,15 @@ func (s *myExternalProcessorServer) Process(stream extprocv3.ExternalProcessor_P
 		// 6. 选择最优端点
 		chosenEndpoint := s.pickOptimalEndpoint(cleanedEndpoints, needLoRA)
 
-		// 7. 构造响应：核心修正！将 HeaderValue 封装为 HeaderValueOption（匹配 SetHeaders 类型）
+		// 7. 构造响应（指令）
 		resp := &extprocv3.ProcessingResponse{
-			Response: &extprocv3.ProcessingResponse_RequestHeaders{
+			Response: &extprocv3.ProcessingResponse_RequestHeaders{ // 针对“请求头”阶段的响应
 				RequestHeaders: &extprocv3.HeadersResponse{
 					Response: &extprocv3.CommonResponse{
 						Status: extprocv3.CommonResponse_CONTINUE,
-						HeaderMutation: &extprocv3.HeaderMutation{
-							// 关键修正：SetHeaders 要求 []*HeaderValueOption，因此用 HeaderValueOption 包裹 HeaderValue
-							// 若需指定操作类型（如追加），可添加 Operation: corev3.HeaderOperation_APPEND
+						HeaderMutation: &extprocv3.HeaderMutation{ // 动态路由的关键：设置新的目标端点头
 							SetHeaders: []*corev3.HeaderValueOption{
 								{
-									// Header 字段：赋值为 *corev3.HeaderValue（你的键值对）
 									Header: &corev3.HeaderValue{
 										Key:   "x-gateway-destination-endpoint",
 										Value: chosenEndpoint,
@@ -167,7 +167,7 @@ func (s *myExternalProcessorServer) Process(stream extprocv3.ExternalProcessor_P
 					},
 				},
 			},
-			// 动态元数据（不变）
+			// 动态元数据（信息）
 			DynamicMetadata: &structpb.Struct{
 				Fields: map[string]*structpb.Value{
 					"epp.chosen_endpoint": structpb.NewStringValue(chosenEndpoint),

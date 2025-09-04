@@ -16,7 +16,7 @@ import (
 // 构造 Ext-Proc 请求头消息（模拟 Envoy 发送的请求）
 // 参数：端点列表（逗号分隔字符串）、是否需要 LoRA、模型名
 func buildRequestHeaders(endpointSubsetStr string, needLoRA bool, modelName string) *extprocv3.ProcessingRequest {
-	// 1. 构造请求头列表（corev3.HeaderMap 类型，包含关键头字段）
+	// 1. 构造请求头列表
 	headerMap := &corev3.HeaderMap{
 		Headers: []*corev3.HeaderValue{
 			{
@@ -38,7 +38,7 @@ func buildRequestHeaders(endpointSubsetStr string, needLoRA bool, modelName stri
 			},
 			{
 				Key:   "user-agent",
-				Value: "envoy-ext-proc-client/test", // **修正：将 "value" 改为 Value**
+				Value: "envoy-ext-proc-client/test",
 			},
 		},
 	}
@@ -46,14 +46,14 @@ func buildRequestHeaders(endpointSubsetStr string, needLoRA bool, modelName stri
 	// 2. 构造“请求头阶段”的 ProcessingRequest（Ext-Proc 协议要求）
 	return &extprocv3.ProcessingRequest{
 		Request: &extprocv3.ProcessingRequest_RequestHeaders{
-			RequestHeaders: &extprocv3.HttpHeaders{ // **核心修正：将 HttpRequestHeaders 改为 HttpHeaders**
+			RequestHeaders: &extprocv3.HttpHeaders{
 				Headers: headerMap,
 			},
 		},
 	}
 }
 
-// 解析服务端响应，提取选中的端点和元数据 (此函数无需修改)
+// 解析服务端响应，提取选中的端点和元数据
 func parseResponse(resp *extprocv3.ProcessingResponse) (string, string, bool, error) {
 	// 1. 确认响应类型为“请求头响应”
 	respHeaders, ok := resp.Response.(*extprocv3.ProcessingResponse_RequestHeaders)
@@ -98,28 +98,32 @@ func parseResponse(resp *extprocv3.ProcessingResponse) (string, string, bool, er
 
 // 客户端主逻辑：连接 EPP 服务，发送请求，接收响应 (此函数无需修改)
 func runClient(eppServerAddr string) error {
-	// 1. 连接 EPP 服务
-	conn, err := grpc.Dial(
+	// 虽然 NewClient 是非阻塞的，但我们可以为第一次 RPC 调用设置一个超时，
+	// 这间接达到了验证连接是否可在短时间内建立的目的。
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	// 2. 连接 EPP 服务 (使用新的 grpc.NewClient API)
+	// 这个调用是非阻塞的，会立即返回 conn。gRPC 会在后台异步建立连接。
+	conn, err := grpc.NewClient(
 		eppServerAddr,
-		grpc.WithTransportCredentials(insecure.NewCredentials()),
-		grpc.WithBlock(),
-		grpc.WithTimeout(5*time.Second),
+		grpc.WithTransportCredentials(insecure.NewCredentials()), // 非安全连接（测试用）
 	)
 	if err != nil {
-		return fmt.Errorf("连接 EPP 服务失败（%s）：%w", eppServerAddr, err)
+		return fmt.Errorf("创建 gRPC 客户端失败：%w", err)
 	}
 	defer func() {
 		if err := conn.Close(); err != nil {
 			log.Printf("关闭连接错误：%v", err)
 		}
 	}()
-	log.Printf("成功连接 EPP 服务：%s", eppServerAddr)
+	log.Printf("gRPC 客户端已创建，正在连接到 EPP 服务：%s", eppServerAddr)
 
 	// 2. 创建 EPP 客户端 stub
 	client := extprocv3.NewExternalProcessorClient(conn)
 
-	// 3. 建立双向流
-	stream, err := client.Process(context.Background())
+	// 3. 建立双向流 (将超时的 context 传递给 Process 方法)
+	stream, err := client.Process(ctx)
 	if err != nil {
 		return fmt.Errorf("创建 stream 失败：%w", err)
 	}
