@@ -2,13 +2,11 @@ package main
 
 import (
 	"fmt"
+	extprocv3 "github.com/Lingbo-Huang/my-epp/envoy/service/ext_proc/v3"
+	"google.golang.org/grpc"
 	"io"
 	"log"
 	"net"
-
-	"context"
-	extprocv3 "github.com/Lingbo-Huang/my-epp/envoy/service/ext_proc/v3"
-	"google.golang.org/grpc"
 )
 
 type myExternalProcessorServer struct {
