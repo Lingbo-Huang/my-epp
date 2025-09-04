@@ -4,7 +4,7 @@
 // - protoc             v5.29.3
 // source: proto/external_processor.proto
 
-package ext_procv3
+package v3
 
 import (
 	context "context"
