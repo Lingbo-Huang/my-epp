@@ -1,5 +1,5 @@
 syntax = "proto3";
-option go_package = "github.com/Lingbo-Huang/my-epp/envoy/api/udpa/annotations;annotations";
+option go_package = "github.com/Lingbo-Huang/my-epp/udpa/annotations;annotations";
 package udpa.annotations;
 
 import "google/protobuf/descriptor.proto";
