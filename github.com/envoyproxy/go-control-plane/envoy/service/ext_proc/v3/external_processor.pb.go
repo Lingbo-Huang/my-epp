@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.8
 // 	protoc        v5.29.3
-// source: external_processor.proto
+// source: envoy/service/ext_proc/v3/external_processor.proto
 
 package ext_procv3
 
@@ -76,11 +76,11 @@ func (x CommonResponse_ResponseStatus) String() string {
 }
 
 func (CommonResponse_ResponseStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_external_processor_proto_enumTypes[0].Descriptor()
+	return file_envoy_service_ext_proc_v3_external_processor_proto_enumTypes[0].Descriptor()
 }
 
 func (CommonResponse_ResponseStatus) Type() protoreflect.EnumType {
-	return &file_external_processor_proto_enumTypes[0]
+	return &file_envoy_service_ext_proc_v3_external_processor_proto_enumTypes[0]
 }
 
 func (x CommonResponse_ResponseStatus) Number() protoreflect.EnumNumber {
@@ -89,7 +89,7 @@ func (x CommonResponse_ResponseStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use CommonResponse_ResponseStatus.Descriptor instead.
 func (CommonResponse_ResponseStatus) EnumDescriptor() ([]byte, []int) {
-	return file_external_processor_proto_rawDescGZIP(), []int{9, 0}
+	return file_envoy_service_ext_proc_v3_external_processor_proto_rawDescGZIP(), []int{9, 0}
 }
 
 // This message specifies the filter protocol configurations which will be sent to the ext_proc
@@ -115,7 +115,7 @@ type ProtocolConfiguration struct {
 
 func (x *ProtocolConfiguration) Reset() {
 	*x = ProtocolConfiguration{}
-	mi := &file_external_processor_proto_msgTypes[0]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -127,7 +127,7 @@ func (x *ProtocolConfiguration) String() string {
 func (*ProtocolConfiguration) ProtoMessage() {}
 
 func (x *ProtocolConfiguration) ProtoReflect() protoreflect.Message {
-	mi := &file_external_processor_proto_msgTypes[0]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -140,7 +140,7 @@ func (x *ProtocolConfiguration) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProtocolConfiguration.ProtoReflect.Descriptor instead.
 func (*ProtocolConfiguration) Descriptor() ([]byte, []int) {
-	return file_external_processor_proto_rawDescGZIP(), []int{0}
+	return file_envoy_service_ext_proc_v3_external_processor_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ProtocolConfiguration) GetRequestBodyMode() v3.ProcessingMode_BodySendMode {
@@ -209,7 +209,7 @@ type ProcessingRequest struct {
 
 func (x *ProcessingRequest) Reset() {
 	*x = ProcessingRequest{}
-	mi := &file_external_processor_proto_msgTypes[1]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -221,7 +221,7 @@ func (x *ProcessingRequest) String() string {
 func (*ProcessingRequest) ProtoMessage() {}
 
 func (x *ProcessingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_external_processor_proto_msgTypes[1]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -234,7 +234,7 @@ func (x *ProcessingRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProcessingRequest.ProtoReflect.Descriptor instead.
 func (*ProcessingRequest) Descriptor() ([]byte, []int) {
-	return file_external_processor_proto_rawDescGZIP(), []int{1}
+	return file_envoy_service_ext_proc_v3_external_processor_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ProcessingRequest) GetRequest() isProcessingRequest_Request {
@@ -449,7 +449,7 @@ type ProcessingResponse struct {
 
 func (x *ProcessingResponse) Reset() {
 	*x = ProcessingResponse{}
-	mi := &file_external_processor_proto_msgTypes[2]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -461,7 +461,7 @@ func (x *ProcessingResponse) String() string {
 func (*ProcessingResponse) ProtoMessage() {}
 
 func (x *ProcessingResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_external_processor_proto_msgTypes[2]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -474,7 +474,7 @@ func (x *ProcessingResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProcessingResponse.ProtoReflect.Descriptor instead.
 func (*ProcessingResponse) Descriptor() ([]byte, []int) {
-	return file_external_processor_proto_rawDescGZIP(), []int{2}
+	return file_envoy_service_ext_proc_v3_external_processor_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ProcessingResponse) GetResponse() isProcessingResponse_Response {
@@ -647,7 +647,7 @@ type HttpHeaders struct {
 	// the  top-level :ref:`attributes <envoy_v3_api_field_service.ext_proc.v3.ProcessingRequest.attributes`
 	// field.
 	//
-	// Deprecated: Marked as deprecated in external_processor.proto.
+	// Deprecated: Marked as deprecated in envoy/service/ext_proc/v3/external_processor.proto.
 	Attributes map[string]*structpb.Struct `protobuf:"bytes,2,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// If “true“, then there is no message body associated with this
 	// request or response.
@@ -658,7 +658,7 @@ type HttpHeaders struct {
 
 func (x *HttpHeaders) Reset() {
 	*x = HttpHeaders{}
-	mi := &file_external_processor_proto_msgTypes[3]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -670,7 +670,7 @@ func (x *HttpHeaders) String() string {
 func (*HttpHeaders) ProtoMessage() {}
 
 func (x *HttpHeaders) ProtoReflect() protoreflect.Message {
-	mi := &file_external_processor_proto_msgTypes[3]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -683,7 +683,7 @@ func (x *HttpHeaders) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HttpHeaders.ProtoReflect.Descriptor instead.
 func (*HttpHeaders) Descriptor() ([]byte, []int) {
-	return file_external_processor_proto_rawDescGZIP(), []int{3}
+	return file_envoy_service_ext_proc_v3_external_processor_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *HttpHeaders) GetHeaders() *v31.HeaderMap {
@@ -693,7 +693,7 @@ func (x *HttpHeaders) GetHeaders() *v31.HeaderMap {
 	return nil
 }
 
-// Deprecated: Marked as deprecated in external_processor.proto.
+// Deprecated: Marked as deprecated in envoy/service/ext_proc/v3/external_processor.proto.
 func (x *HttpHeaders) GetAttributes() map[string]*structpb.Struct {
 	if x != nil {
 		return x.Attributes
@@ -724,7 +724,7 @@ type HttpBody struct {
 
 func (x *HttpBody) Reset() {
 	*x = HttpBody{}
-	mi := &file_external_processor_proto_msgTypes[4]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -736,7 +736,7 @@ func (x *HttpBody) String() string {
 func (*HttpBody) ProtoMessage() {}
 
 func (x *HttpBody) ProtoReflect() protoreflect.Message {
-	mi := &file_external_processor_proto_msgTypes[4]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -749,7 +749,7 @@ func (x *HttpBody) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HttpBody.ProtoReflect.Descriptor instead.
 func (*HttpBody) Descriptor() ([]byte, []int) {
-	return file_external_processor_proto_rawDescGZIP(), []int{4}
+	return file_envoy_service_ext_proc_v3_external_processor_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *HttpBody) GetBody() []byte {
@@ -779,7 +779,7 @@ type HttpTrailers struct {
 
 func (x *HttpTrailers) Reset() {
 	*x = HttpTrailers{}
-	mi := &file_external_processor_proto_msgTypes[5]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -791,7 +791,7 @@ func (x *HttpTrailers) String() string {
 func (*HttpTrailers) ProtoMessage() {}
 
 func (x *HttpTrailers) ProtoReflect() protoreflect.Message {
-	mi := &file_external_processor_proto_msgTypes[5]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -804,7 +804,7 @@ func (x *HttpTrailers) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HttpTrailers.ProtoReflect.Descriptor instead.
 func (*HttpTrailers) Descriptor() ([]byte, []int) {
-	return file_external_processor_proto_rawDescGZIP(), []int{5}
+	return file_envoy_service_ext_proc_v3_external_processor_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *HttpTrailers) GetTrailers() *v31.HeaderMap {
@@ -827,7 +827,7 @@ type HeadersResponse struct {
 
 func (x *HeadersResponse) Reset() {
 	*x = HeadersResponse{}
-	mi := &file_external_processor_proto_msgTypes[6]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -839,7 +839,7 @@ func (x *HeadersResponse) String() string {
 func (*HeadersResponse) ProtoMessage() {}
 
 func (x *HeadersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_external_processor_proto_msgTypes[6]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -852,7 +852,7 @@ func (x *HeadersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HeadersResponse.ProtoReflect.Descriptor instead.
 func (*HeadersResponse) Descriptor() ([]byte, []int) {
-	return file_external_processor_proto_rawDescGZIP(), []int{6}
+	return file_envoy_service_ext_proc_v3_external_processor_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *HeadersResponse) GetResponse() *CommonResponse {
@@ -875,7 +875,7 @@ type BodyResponse struct {
 
 func (x *BodyResponse) Reset() {
 	*x = BodyResponse{}
-	mi := &file_external_processor_proto_msgTypes[7]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -887,7 +887,7 @@ func (x *BodyResponse) String() string {
 func (*BodyResponse) ProtoMessage() {}
 
 func (x *BodyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_external_processor_proto_msgTypes[7]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -900,7 +900,7 @@ func (x *BodyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BodyResponse.ProtoReflect.Descriptor instead.
 func (*BodyResponse) Descriptor() ([]byte, []int) {
-	return file_external_processor_proto_rawDescGZIP(), []int{7}
+	return file_envoy_service_ext_proc_v3_external_processor_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *BodyResponse) GetResponse() *CommonResponse {
@@ -923,7 +923,7 @@ type TrailersResponse struct {
 
 func (x *TrailersResponse) Reset() {
 	*x = TrailersResponse{}
-	mi := &file_external_processor_proto_msgTypes[8]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -935,7 +935,7 @@ func (x *TrailersResponse) String() string {
 func (*TrailersResponse) ProtoMessage() {}
 
 func (x *TrailersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_external_processor_proto_msgTypes[8]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -948,7 +948,7 @@ func (x *TrailersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TrailersResponse.ProtoReflect.Descriptor instead.
 func (*TrailersResponse) Descriptor() ([]byte, []int) {
-	return file_external_processor_proto_rawDescGZIP(), []int{8}
+	return file_envoy_service_ext_proc_v3_external_processor_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *TrailersResponse) GetHeaderMutation() *HeaderMutation {
@@ -995,7 +995,7 @@ type CommonResponse struct {
 
 func (x *CommonResponse) Reset() {
 	*x = CommonResponse{}
-	mi := &file_external_processor_proto_msgTypes[9]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1007,7 +1007,7 @@ func (x *CommonResponse) String() string {
 func (*CommonResponse) ProtoMessage() {}
 
 func (x *CommonResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_external_processor_proto_msgTypes[9]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1020,7 +1020,7 @@ func (x *CommonResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CommonResponse.ProtoReflect.Descriptor instead.
 func (*CommonResponse) Descriptor() ([]byte, []int) {
-	return file_external_processor_proto_rawDescGZIP(), []int{9}
+	return file_envoy_service_ext_proc_v3_external_processor_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CommonResponse) GetStatus() CommonResponse_ResponseStatus {
@@ -1086,7 +1086,7 @@ type ImmediateResponse struct {
 
 func (x *ImmediateResponse) Reset() {
 	*x = ImmediateResponse{}
-	mi := &file_external_processor_proto_msgTypes[10]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1098,7 +1098,7 @@ func (x *ImmediateResponse) String() string {
 func (*ImmediateResponse) ProtoMessage() {}
 
 func (x *ImmediateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_external_processor_proto_msgTypes[10]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1111,7 +1111,7 @@ func (x *ImmediateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ImmediateResponse.ProtoReflect.Descriptor instead.
 func (*ImmediateResponse) Descriptor() ([]byte, []int) {
-	return file_external_processor_proto_rawDescGZIP(), []int{10}
+	return file_envoy_service_ext_proc_v3_external_processor_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ImmediateResponse) GetStatus() *v32.HttpStatus {
@@ -1160,7 +1160,7 @@ type GrpcStatus struct {
 
 func (x *GrpcStatus) Reset() {
 	*x = GrpcStatus{}
-	mi := &file_external_processor_proto_msgTypes[11]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1172,7 +1172,7 @@ func (x *GrpcStatus) String() string {
 func (*GrpcStatus) ProtoMessage() {}
 
 func (x *GrpcStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_external_processor_proto_msgTypes[11]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1185,7 +1185,7 @@ func (x *GrpcStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GrpcStatus.ProtoReflect.Descriptor instead.
 func (*GrpcStatus) Descriptor() ([]byte, []int) {
-	return file_external_processor_proto_rawDescGZIP(), []int{11}
+	return file_envoy_service_ext_proc_v3_external_processor_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GrpcStatus) GetStatus() uint32 {
@@ -1214,7 +1214,7 @@ type HeaderMutation struct {
 
 func (x *HeaderMutation) Reset() {
 	*x = HeaderMutation{}
-	mi := &file_external_processor_proto_msgTypes[12]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1226,7 +1226,7 @@ func (x *HeaderMutation) String() string {
 func (*HeaderMutation) ProtoMessage() {}
 
 func (x *HeaderMutation) ProtoReflect() protoreflect.Message {
-	mi := &file_external_processor_proto_msgTypes[12]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1239,7 +1239,7 @@ func (x *HeaderMutation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HeaderMutation.ProtoReflect.Descriptor instead.
 func (*HeaderMutation) Descriptor() ([]byte, []int) {
-	return file_external_processor_proto_rawDescGZIP(), []int{12}
+	return file_envoy_service_ext_proc_v3_external_processor_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *HeaderMutation) GetSetHeaders() []*v31.HeaderValueOption {
@@ -1271,7 +1271,7 @@ type StreamedBodyResponse struct {
 
 func (x *StreamedBodyResponse) Reset() {
 	*x = StreamedBodyResponse{}
-	mi := &file_external_processor_proto_msgTypes[13]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1283,7 +1283,7 @@ func (x *StreamedBodyResponse) String() string {
 func (*StreamedBodyResponse) ProtoMessage() {}
 
 func (x *StreamedBodyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_external_processor_proto_msgTypes[13]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1296,7 +1296,7 @@ func (x *StreamedBodyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamedBodyResponse.ProtoReflect.Descriptor instead.
 func (*StreamedBodyResponse) Descriptor() ([]byte, []int) {
-	return file_external_processor_proto_rawDescGZIP(), []int{13}
+	return file_envoy_service_ext_proc_v3_external_processor_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *StreamedBodyResponse) GetBody() []byte {
@@ -1330,7 +1330,7 @@ type BodyMutation struct {
 
 func (x *BodyMutation) Reset() {
 	*x = BodyMutation{}
-	mi := &file_external_processor_proto_msgTypes[14]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1342,7 +1342,7 @@ func (x *BodyMutation) String() string {
 func (*BodyMutation) ProtoMessage() {}
 
 func (x *BodyMutation) ProtoReflect() protoreflect.Message {
-	mi := &file_external_processor_proto_msgTypes[14]
+	mi := &file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1355,7 +1355,7 @@ func (x *BodyMutation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BodyMutation.ProtoReflect.Descriptor instead.
 func (*BodyMutation) Descriptor() ([]byte, []int) {
-	return file_external_processor_proto_rawDescGZIP(), []int{14}
+	return file_envoy_service_ext_proc_v3_external_processor_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *BodyMutation) GetMutation() isBodyMutation_Mutation {
@@ -1426,11 +1426,11 @@ func (*BodyMutation_ClearBody) isBodyMutation_Mutation() {}
 
 func (*BodyMutation_StreamedResponse) isBodyMutation_Mutation() {}
 
-var File_external_processor_proto protoreflect.FileDescriptor
+var File_envoy_service_ext_proc_v3_external_processor_proto protoreflect.FileDescriptor
 
-const file_external_processor_proto_rawDesc = "" +
+const file_envoy_service_ext_proc_v3_external_processor_proto_rawDesc = "" +
 	"\n" +
-	"\x18external_processor.proto\x12\x19envoy.service.ext_proc.v3\x1a\x1fenvoy/config/core/v3/base.proto\x1a?envoy/extensions/filters/http/ext_proc/v3/processing_mode.proto\x1a\x1fenvoy/type/v3/http_status.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fxds/annotations/v3/status.proto\x1a#envoy/annotations/deprecation.proto\x1a\x1dudpa/annotations/status.proto\x1a\x17validate/validate.proto\"\xf5\x02\n" +
+	"2envoy/service/ext_proc/v3/external_processor.proto\x12\x19envoy.service.ext_proc.v3\x1a\x1fenvoy/config/core/v3/base.proto\x1a?envoy/extensions/filters/http/ext_proc/v3/processing_mode.proto\x1a\x1fenvoy/type/v3/http_status.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fxds/annotations/v3/status.proto\x1a#envoy/annotations/deprecation.proto\x1a\x1dudpa/annotations/status.proto\x1a\x17validate/validate.proto\"\xf5\x02\n" +
 	"\x15ProtocolConfiguration\x12|\n" +
 	"\x11request_body_mode\x18\x01 \x01(\x0e2F.envoy.extensions.filters.http.ext_proc.v3.ProcessingMode.BodySendModeB\b\xfaB\x05\x82\x01\x02\x10\x01R\x0frequestBodyMode\x12~\n" +
 	"\x12response_body_mode\x18\x02 \x01(\x0e2F.envoy.extensions.filters.http.ext_proc.v3.ProcessingMode.BodySendModeB\b\xfaB\x05\x82\x01\x02\x10\x01R\x10responseBodyMode\x12^\n" +
@@ -1525,20 +1525,20 @@ const file_external_processor_proto_rawDesc = "" +
 	"'io.envoyproxy.envoy.service.ext_proc.v3B\x16ExternalProcessorProtoP\x01ZKgithub.com/envoyproxy/go-control-plane/envoy/service/ext_proc/v3;ext_procv3b\x06proto3"
 
 var (
-	file_external_processor_proto_rawDescOnce sync.Once
-	file_external_processor_proto_rawDescData []byte
+	file_envoy_service_ext_proc_v3_external_processor_proto_rawDescOnce sync.Once
+	file_envoy_service_ext_proc_v3_external_processor_proto_rawDescData []byte
 )
 
-func file_external_processor_proto_rawDescGZIP() []byte {
-	file_external_processor_proto_rawDescOnce.Do(func() {
-		file_external_processor_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_external_processor_proto_rawDesc), len(file_external_processor_proto_rawDesc)))
+func file_envoy_service_ext_proc_v3_external_processor_proto_rawDescGZIP() []byte {
+	file_envoy_service_ext_proc_v3_external_processor_proto_rawDescOnce.Do(func() {
+		file_envoy_service_ext_proc_v3_external_processor_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_envoy_service_ext_proc_v3_external_processor_proto_rawDesc), len(file_envoy_service_ext_proc_v3_external_processor_proto_rawDesc)))
 	})
-	return file_external_processor_proto_rawDescData
+	return file_envoy_service_ext_proc_v3_external_processor_proto_rawDescData
 }
 
-var file_external_processor_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_external_processor_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
-var file_external_processor_proto_goTypes = []any{
+var file_envoy_service_ext_proc_v3_external_processor_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_envoy_service_ext_proc_v3_external_processor_proto_goTypes = []any{
 	(CommonResponse_ResponseStatus)(0),  // 0: envoy.service.ext_proc.v3.CommonResponse.ResponseStatus
 	(*ProtocolConfiguration)(nil),       // 1: envoy.service.ext_proc.v3.ProtocolConfiguration
 	(*ProcessingRequest)(nil),           // 2: envoy.service.ext_proc.v3.ProcessingRequest
@@ -1566,7 +1566,7 @@ var file_external_processor_proto_goTypes = []any{
 	(*v32.HttpStatus)(nil),              // 24: envoy.type.v3.HttpStatus
 	(*v31.HeaderValueOption)(nil),       // 25: envoy.config.core.v3.HeaderValueOption
 }
-var file_external_processor_proto_depIdxs = []int32{
+var file_envoy_service_ext_proc_v3_external_processor_proto_depIdxs = []int32{
 	18, // 0: envoy.service.ext_proc.v3.ProtocolConfiguration.request_body_mode:type_name -> envoy.extensions.filters.http.ext_proc.v3.ProcessingMode.BodySendMode
 	18, // 1: envoy.service.ext_proc.v3.ProtocolConfiguration.response_body_mode:type_name -> envoy.extensions.filters.http.ext_proc.v3.ProcessingMode.BodySendMode
 	4,  // 2: envoy.service.ext_proc.v3.ProcessingRequest.request_headers:type_name -> envoy.service.ext_proc.v3.HttpHeaders
@@ -1614,12 +1614,12 @@ var file_external_processor_proto_depIdxs = []int32{
 	0,  // [0:38] is the sub-list for field type_name
 }
 
-func init() { file_external_processor_proto_init() }
-func file_external_processor_proto_init() {
-	if File_external_processor_proto != nil {
+func init() { file_envoy_service_ext_proc_v3_external_processor_proto_init() }
+func file_envoy_service_ext_proc_v3_external_processor_proto_init() {
+	if File_envoy_service_ext_proc_v3_external_processor_proto != nil {
 		return
 	}
-	file_external_processor_proto_msgTypes[1].OneofWrappers = []any{
+	file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[1].OneofWrappers = []any{
 		(*ProcessingRequest_RequestHeaders)(nil),
 		(*ProcessingRequest_ResponseHeaders)(nil),
 		(*ProcessingRequest_RequestBody)(nil),
@@ -1627,7 +1627,7 @@ func file_external_processor_proto_init() {
 		(*ProcessingRequest_RequestTrailers)(nil),
 		(*ProcessingRequest_ResponseTrailers)(nil),
 	}
-	file_external_processor_proto_msgTypes[2].OneofWrappers = []any{
+	file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[2].OneofWrappers = []any{
 		(*ProcessingResponse_RequestHeaders)(nil),
 		(*ProcessingResponse_ResponseHeaders)(nil),
 		(*ProcessingResponse_RequestBody)(nil),
@@ -1636,7 +1636,7 @@ func file_external_processor_proto_init() {
 		(*ProcessingResponse_ResponseTrailers)(nil),
 		(*ProcessingResponse_ImmediateResponse)(nil),
 	}
-	file_external_processor_proto_msgTypes[14].OneofWrappers = []any{
+	file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes[14].OneofWrappers = []any{
 		(*BodyMutation_Body)(nil),
 		(*BodyMutation_ClearBody)(nil),
 		(*BodyMutation_StreamedResponse)(nil),
@@ -1645,18 +1645,18 @@ func file_external_processor_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_external_processor_proto_rawDesc), len(file_external_processor_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_envoy_service_ext_proc_v3_external_processor_proto_rawDesc), len(file_envoy_service_ext_proc_v3_external_processor_proto_rawDesc)),
 			NumEnums:      1,
 			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_external_processor_proto_goTypes,
-		DependencyIndexes: file_external_processor_proto_depIdxs,
-		EnumInfos:         file_external_processor_proto_enumTypes,
-		MessageInfos:      file_external_processor_proto_msgTypes,
+		GoTypes:           file_envoy_service_ext_proc_v3_external_processor_proto_goTypes,
+		DependencyIndexes: file_envoy_service_ext_proc_v3_external_processor_proto_depIdxs,
+		EnumInfos:         file_envoy_service_ext_proc_v3_external_processor_proto_enumTypes,
+		MessageInfos:      file_envoy_service_ext_proc_v3_external_processor_proto_msgTypes,
 	}.Build()
-	File_external_processor_proto = out.File
-	file_external_processor_proto_goTypes = nil
-	file_external_processor_proto_depIdxs = nil
+	File_envoy_service_ext_proc_v3_external_processor_proto = out.File
+	file_envoy_service_ext_proc_v3_external_processor_proto_goTypes = nil
+	file_envoy_service_ext_proc_v3_external_processor_proto_depIdxs = nil
 }
