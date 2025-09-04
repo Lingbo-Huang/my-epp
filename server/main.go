@@ -1,12 +1,13 @@
 package main
 
 import (
-	"context"
 	"fmt"
+	"io"
 	"log"
 	"net"
 
-	extprocv3 "github.com/envoyproxy/go-control-plane/envoy/service/ext_proc/v3"
+	"context"
+	extprocv3 "github.com/Lingbo-Huang/my-epp/envoy/service/ext_proc/v3"
 	"google.golang.org/grpc"
 )
 
@@ -14,10 +15,27 @@ type myExternalProcessorServer struct {
 	extprocv3.UnimplementedExternalProcessorServer
 }
 
-func (s *myExternalProcessorServer) Process(context.Context, *extprocv3.ExternalProcessorRequest) (*extprocv3.ExternalProcessorResponse, error) {
-	// TODO: 这里写你自己的逻辑
-	fmt.Println("Received a request!")
-	return &extprocv3.ExternalProcessorResponse{}, nil
+func (s *myExternalProcessorServer) Process(stream extprocv3.ExternalProcessor_ProcessServer) error {
+	for {
+		req, err := stream.Recv()
+		if err == io.EOF {
+			fmt.Println("Stream closed by client.")
+			return nil
+		}
+		if err != nil {
+			log.Printf("Error receiving from stream: %v", err)
+			return err
+		}
+		fmt.Printf("Received request: %+v\n", req)
+
+		// 构造简单响应
+		resp := &extprocv3.ProcessingResponse{}
+		if err := stream.Send(resp); err != nil {
+			log.Printf("Error sending response: %v", err)
+			return err
+		}
+		fmt.Println("Response sent.")
+	}
 }
 
 func main() {
