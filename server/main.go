@@ -7,8 +7,8 @@ import (
 	"net"
 	"strings"
 
-	corev3 "github.com/Lingbo-Huang/my-epp/envoy/config/core/v3" // corev3 包（包含 HeaderValue/HeaderValueOption）
-	extprocv3 "github.com/Lingbo-Huang/my-epp/envoy/service/ext_proc/v3"
+	corev3 "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
+	extprocv3 "github.com/envoyproxy/go-control-plane/envoy/service/ext_proc/v3"
 	"google.golang.org/grpc"
 	structpb "google.golang.org/protobuf/types/known/structpb"
 )
