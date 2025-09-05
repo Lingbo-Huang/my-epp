@@ -171,7 +171,7 @@ func (h *ResponseHandler) buildQueuedResponse(resp *types.ProcessingResponse) (*
 	return &extprocv3.ProcessingResponse{
 		Response: &extprocv3.ProcessingResponse_ImmediateResponse{
 			ImmediateResponse: &extprocv3.ImmediateResponse{
-				Status: &extprocv3.HttpStatus{Code: 202},
+				Status: &typesv3.HttpStatus{Code: typesv3.StatusCode_Accepted},
 				Headers: &extprocv3.HeaderMutation{
 					SetHeaders: headerMutations,
 				},
@@ -255,7 +255,7 @@ func (h *ResponseHandler) buildFailedResponse(resp *types.ProcessingResponse) (*
 	return &extprocv3.ProcessingResponse{
 		Response: &extprocv3.ProcessingResponse_ImmediateResponse{
 			ImmediateResponse: &extprocv3.ImmediateResponse{
-				Status: &extprocv3.HttpStatus{Code: extprocv3.StatusCode_InternalServerError},
+				Status: &typesv3.HttpStatus{Code: typesv3.StatusCode_InternalServerError},
 				Headers: &extprocv3.HeaderMutation{
 					SetHeaders: headerMutations,
 				},

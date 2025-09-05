@@ -9,6 +9,7 @@ import (
 
 	"github.com/Lingbo-Huang/my-epp/pkg/interfaces"
 	extprocv3 "github.com/envoyproxy/go-control-plane/envoy/service/ext_proc/v3"
+	typesv3 "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	"google.golang.org/grpc"
 )
 
@@ -142,7 +143,7 @@ func (s *ExtProcServer) processRequest(ctx context.Context, req *extprocv3.Proce
 		return &extprocv3.ProcessingResponse{
 			Response: &extprocv3.ProcessingResponse_ImmediateResponse{
 				ImmediateResponse: &extprocv3.ImmediateResponse{
-					Status: &extprocv3.HttpStatus{Code: 200},
+					Status: &typesv3.HttpStatus{Code: typesv3.StatusCode_OK},
 				},
 			},
 		}, nil
@@ -183,7 +184,7 @@ func (s *ExtProcServer) buildErrorResponse(req *extprocv3.ProcessingRequest, err
 	return &extprocv3.ProcessingResponse{
 		Response: &extprocv3.ProcessingResponse_ImmediateResponse{
 			ImmediateResponse: &extprocv3.ImmediateResponse{
-				Status: &extprocv3.HttpStatus{Code: extprocv3.StatusCode_InternalServerError},
+				Status: &typesv3.HttpStatus{Code: typesv3.StatusCode_InternalServerError},
 				Body:   []byte(fmt.Sprintf("EPP处理错误: %v", err)),
 			},
 		},
