@@ -262,7 +262,7 @@ policy := &types.FlowControlPolicy{
 
 ## 👥 作者
 
-- **Lingbo Huang** - *初始开发* - AI Assistant
+- **Lingbo Huang**
 
 ---
 
