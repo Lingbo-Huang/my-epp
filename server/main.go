@@ -5,7 +5,10 @@ import (
 	"io"
 	"log"
 	"net"
+	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 
 	corev3 "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	extprocv3 "github.com/envoyproxy/go-control-plane/envoy/service/ext_proc/v3"
@@ -192,16 +195,41 @@ func main() {
 	if err != nil {
 		log.Fatalf("监听失败：%v", err)
 	}
-	defer lis.Close()
 
 	// 创建 gRPC 服务
 	grpcServer := grpc.NewServer()
 	eppServer := newMyExternalProcessorServer()
 	extprocv3.RegisterExternalProcessorServer(grpcServer, eppServer)
 
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
+	go func() {
+		// 阻塞等待信号（收到信号前会一直卡在这里）
+		sig := <-sigChan
+		log.Printf("\n收到退出信号：%v，开始优雅停止服务...", sig)
+
+		// 步骤1：优雅停止 gRPC 服务（停止接收新请求，等待正在处理的请求完成）
+		grpcServer.GracefulStop()
+		log.Println("gRPC 服务已停止（所有正在处理的请求已完成）")
+
+		// 步骤2：关闭监听端口（释放 9002 端口）
+		if err := lis.Close(); err != nil {
+			log.Printf("关闭监听端口失败：%v", err)
+		} else {
+			log.Println("监听端口 :9002 已关闭，端口已释放")
+		}
+
+		// 步骤3：清理其他资源（比如关闭数据库连接、释放缓存等）
+		// 例如：if s.podLoadMap 是从数据库加载的，这里可以关闭数据库连接
+
+		// 信号处理完成，退出信号通道（主进程会随之退出）
+		close(sigChan)
+	}()
 	// 启动服务
 	log.Println("EPP 服务启动：:9002")
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("服务启动失败：%v", err)
 	}
+	<-sigChan
+	log.Println("服务已优雅停止，程序退出")
 }
